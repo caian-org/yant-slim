@@ -1,0 +1,54 @@
+name: perform-code-checkings
+
+on:
+  push:
+    branches:
+      - '*'
+    tags:
+      - '*'
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches:
+      - '*'
+    tags:
+      - '*'
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  code-check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        nodejs-version: ['17', '16.13', '14.18', '12.22']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS ${{ matrix.nodejs-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.nodejs-version }}
+
+      - name: Cache Node modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ env.preffix }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ env.preffix }}-build-${{ env.cache-name }}-
+            ${{ env.preffix }}-build-
+            ${{ env.preffix }}-
+        env:
+          cache-name: cache-node-modules
+          preffix: ${{ runner.os }}-node-${{ matrix.nodejs-version }}
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm i
+
+      - name: Perform all checkings
+        run: npm run check:all

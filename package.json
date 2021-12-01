@@ -1,0 +1,68 @@
+{
+  "name": "yant-slim",
+  "version": "0.1.0",
+  "description": "Yet Another NodeJS Template -- but slimmer",
+  "main": "src/index.js",
+  "author": "Caian Ertl <hi@caian.org>",
+  "license": "CC0-1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caian-org/yant-slim.git"
+  },
+  "bugs": {
+    "url": "https://github.com/caian-org/yant-slim/issues"
+  },
+  "homepage": "https://github.com/caian-org/yant-slim#readme",
+  "keywords": [
+    "javascript",
+    "nodejs",
+    "template",
+    "yant-slim"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "start:watch": "nodemon",
+    "bump:dev": "ncu --upgrade --dep dev --target minor",
+    "bump:prod": "ncu --upgrade --dep prod --target minor",
+    "bump:all": "npm run bump:dev && npm run bump:prod",
+    "check:lint": "eslint --format=codeframe '**/*.js'",
+    "check:style": "standard",
+    "check:duplicated": "jscpd",
+    "check:all": "npm run check:lint && npm run check:style && npm run check:duplicated",
+    "fix:style": "prettier --no-semi --print-width 100 --single-quote --trailing-comma none --write '**/*.js' && standard --fix '**/*.js'"
+  },
+  "eslintIgnore": [
+    "report"
+  ],
+  "jscpd": {
+    "threshold": 5,
+    "reporters": [
+      "html",
+      "console"
+    ],
+    "absolute": true,
+    "gitignore": true
+  },
+  "nodemonConfig": {
+    "ignore": [
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "npm start",
+    "ext": "js"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "husky": "^7.0.4",
+    "jscpd": "^3.4.2",
+    "nodemon": "^2.0.15",
+    "npm-check-updates": "^11.8.5",
+    "prettier": "^2.4.1",
+    "standard": "^16.0.4"
+  }
+}
