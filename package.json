@@ -55,14 +55,17 @@
     "ext": "js"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
+    "eslint": "^8.11.0",
     "eslint-config-standard": "^16.0.3",
+    "eslint-formatter-codeframe": "^7.32.1",
     "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "6.0.0",
     "husky": "^7.0.4",
     "jscpd": "^3.4.5",
     "nodemon": "^2.0.15",
-    "npm-check-updates": "^12.2.1",
-    "prettier": "^2.5.1",
+    "npm-check-updates": "^12.5.4",
+    "prettier": "^2.6.1",
     "standard": "^16.0.4"
   }
 }
