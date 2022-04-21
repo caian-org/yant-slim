@@ -66,6 +66,6 @@
     "nodemon": "^2.0.15",
     "npm-check-updates": "^12.5.4",
     "prettier": "^2.6.1",
-    "standard": "^16.0.4"
+    "standard": "^17.0.0"
   }
 }
